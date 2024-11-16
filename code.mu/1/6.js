@@ -49,36 +49,3 @@ function getNumbersRange(arr, start, end) {
 }
 
 getNumbersRange([0, 1, 27, 6, 10], 0, 10);
-
-// №5 * - даны 2 отсортированных массива чисел. Из них нужно получить 1, но тоже отсортированный массив. Решить задачу простым (неоптимальным) и оптимальным с точки зрения время выполнения алгоритма.
-
-// Неоптимальное решение:
-function mergeSortedArraysNoPerformance(arrFirst, arrSecond) {
-  const mergeNoSortArray = arrFirst.concat(arrSecond);
-  mergeNoSortArray.sort();
-  return mergeNoSortArray;
-}
-
-// Оптимальное решение
-function mergeSortedArrays(arrFirst, arrSecond) {
-  let mergedArray = [];
-  let i = 0;
-  let j = 0;
-
-  // Используем указатели для слияния
-  while (i < arr1.length && j < arr2.length) {
-    if (arr1[i] < arr2[j]) {
-      mergedArray.push(arr1[i]);
-      i++;
-    } else {
-      mergedArray.push(arr2[j]);
-      j++;
-    }
-  }
-
-  return mergedArray;
-}
-
-console.log(mergeSortedArraysNoPerformance([1, 5, 10], [2, 6, 15]));
-console.log(mergeSortedArraysNoPerformance([1, 3, 7, 9], [2, 4]));
-console.log(mergeSortedArraysNoPerformance([], [2, 4, 6]));
