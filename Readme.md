@@ -6,4 +6,4 @@ nodemon ./example.js
 
 ##### Для runtime компиляции и выполнения ts файлов:
 
-nodemon --watch ./example.ts --exec "npx ts-node ./example.ts"
+nodemon --watch ./#.ts --exec "npx ts-node ./#.ts"
