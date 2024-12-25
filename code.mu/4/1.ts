@@ -70,25 +70,25 @@ function setTextLength(length: number, text: string): string {
 // №5
 // Сделайте функцию, которая параметром будет получать дату, а возвращать знак зодиака, соответствующий этой дате.
 
-function getZodiacSign(date: Date): string {
-  type ZodiacValues =
-    | "Козерог"
-    | "Водолей"
-    | "Рыбы"
-    | "Овен"
-    | "Телец"
-    | "Близнецы"
-    | "Рак"
-    | "Лев"
-    | "Дева"
-    | "Весы"
-    | "Скорпион"
-    | "Стрелец";
+type ZodiacValues =
+  | "Козерог"
+  | "Водолей"
+  | "Рыбы"
+  | "Овен"
+  | "Телец"
+  | "Близнецы"
+  | "Рак"
+  | "Лев"
+  | "Дева"
+  | "Весы"
+  | "Скорпион"
+  | "Стрелец";
 
+function getZodiacSign(date: Date): ZodiacValues {
   const zodiacRanges: {
     sign: ZodiacValues;
-    start: [number, number];
-    end: [number, number];
+    start: [number, number]; // [month, day]
+    end: [number, number]; // [month, day]
   }[] = [
     { sign: "Козерог", start: [12, 22], end: [1, 20] },
     { sign: "Водолей", start: [1, 21], end: [2, 20] },
@@ -103,7 +103,16 @@ function getZodiacSign(date: Date): string {
     { sign: "Скорпион", start: [10, 24], end: [11, 22] },
     { sign: "Стрелец", start: [11, 23], end: [12, 21] },
   ];
-
+  /**
+   *
+   * @param month месяц из даты
+   * @param day день из даты
+   * @param start начало диппазона
+   * @param end конец
+   * @returns Boolean, попадает ли дата в диапазон
+   * @description  Объединение месяца и дня даты через умножение (например на 100) делает удобным сравнение дат, как будто это просто числа. 1е Января = 101, 31е декабря = 3001 (101 < 3001).
+   * Формула: месяц * 100 + день
+   */
   function isDateInRange(
     month: number,
     day: number,
