@@ -1,6 +1,8 @@
 // №1
 // Сделайте функцию, которая параметром будет принимать число, а возвращать количество его делителей.
 function dividersCount(number: number): number {
+  if (number <= 0) return 0;
+
   let count = 0;
   for (let i = 1; i <= number; i++) {
     if (number % i === 0) count++;
@@ -27,7 +29,7 @@ type ZodiacVal =
 
 function getSignZodiac(birthday: Date): ZodiacVal {
   const zodiacRanges: {
-    sign: ZodiacValues;
+    sign: ZodiacVal;
     start: [number, number]; // [month, day]
     end: [number, number]; // [month, day]
   }[] = [
@@ -50,7 +52,7 @@ function getSignZodiac(birthday: Date): ZodiacVal {
     range: [[number, number], [number, number]]
   ): boolean {
     const day = date.getDate();
-    const month = date.getMonth() + 1; // в формате 12ти месяцев в году
+    const month = date.getMonth() + 1; // январь = 0
     const [start, end] = range;
 
     const dayValue = month * 100 + day;
@@ -78,8 +80,10 @@ function getSignZodiac(birthday: Date): ZodiacVal {
 // №3
 // Сделайте функцию, которая параметром будет принимать число, а возвращать массив его делителей.
 function getDividesList(number: number): number[] {
+  if (number === 0) return [0];
+
   const divides = [];
-  for (let i = 1; i < number; i++) {
+  for (let i = 1; i < Math.abs(number); i++) {
     if (number % i === 0) {
       divides.push(i);
     }
@@ -90,12 +94,43 @@ function getDividesList(number: number): number[] {
 
 // №4
 // Сделайте функцию, которая параметром будет принимать число и проверять, простое оно или нет.
-function isPrimeNumber(number: number): boolean {}
+function isPrimeNumber(number: number): boolean {
+  if (number < 2) return false;
+  for (let i = 2; i <= Math.sqrt(number); i++) {
+    if (number % i === 0) {
+      return false;
+    }
+  }
+  return true;
+}
 
 // №5
-
 // Сделайте функцию, которая параметром будет принимать число и удалять из него четные цифры.
+function deleteOddDigit(number: number): number {
+  if (isNaN(number)) return 0;
+  const numToString = number.toString();
+  const filtered = number
+    .toString()
+    .split("")
+    .filter((digit) => +digit % 2 !== 0)
+    .join("");
+  return filtered ? +filtered : 0;
+}
 
 // №6
-
 // Сделайте функцию, которая заполнит массив N случайными числами из заданного промежутка.
+function createRandomNumbers(from: number, to: number, limit = 10): number[] {
+  if (from > to)
+    throw new Error("Invalid range: 'from' should be less than 'to'");
+  const result = [];
+
+  function getRandomDigit(from: number, to: number): number {
+    return Math.floor(Math.random() * (to - from + 1)) + from;
+  }
+
+  for (let i = 0; i < limit; i++) {
+    result.push(getRandomDigit(from, to));
+  }
+
+  return result;
+}
