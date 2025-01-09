@@ -10,11 +10,19 @@ function getRandomItem<T>(arr: T[]): T {
 }
 
 // №2
-
 // Сделайте функцию, которая параметром будет принимать массив и возвращать массив из N случайных элементов этого массива.
+function getRandomElems<T>(arr: T[], n = 1): T[] {
+  if (arr.length <= 1) return arr;
+  const result: T[] = [];
+  while (n > 0) {
+    const randomIndex = Math.floor(Math.random() * arr.length);
+    result.push(arr[randomIndex]);
+    n--;
+  }
+  return result;
+}
 
 // №3
-
 // Сделайте функцию, которая параметром будет принимать массив и возвращать случайный элемент этого массива так, чтобы одинаковые элементы не возвращались два раза подряд.
 
 // №4
