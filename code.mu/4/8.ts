@@ -24,6 +24,23 @@ function getRandomElems<T>(arr: T[], n = 1): T[] {
 
 // №3
 // Сделайте функцию, которая параметром будет принимать массив и возвращать случайный элемент этого массива так, чтобы одинаковые элементы не возвращались два раза подряд.
+function getRandomElemsNoDouble<T>(arr: T[], count: number): T[] {
+  if (arr.length === 0 || count <= 0) return [];
+  if (count > arr.length) count = arr.length;
+
+  const result: T[] = [];
+  let lastIndex: number | null = null;
+
+  while (result.length < count) {
+    const randomIndex = Math.floor(Math.random() * arr.length);
+    if (randomIndex === lastIndex) continue;
+
+    result.push(arr[randomIndex]);
+    lastIndex = randomIndex;
+  }
+
+  return result;
+}
 
 // №4
 
