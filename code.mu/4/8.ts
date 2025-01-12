@@ -43,8 +43,39 @@ function getRandomElemsNoDouble<T>(arr: T[], count: number): T[] {
 }
 
 // №4
-
 // Сделайте функцию, которая будет возвращать массив простых чисел из заданного промежутка.
+
+function findPrimesInRange(range: [number, number]): number[] {
+  const [from, to] = range;
+
+  // простые числа могут быть определены определены только для целых
+  // диапазон должен быть корректным
+  if (!Number.isInteger(from) || !Number.isInteger(to) || from > to) {
+    throw new Error("Invalid range: ensure integers and start <= end");
+  }
+
+  function isPrime(num: number) {
+    if (num <= 1) return false; // Отрицательные числа, 0 и 1 не являются простыми.
+    if (num <= 3) return true; // 2 и 3 — простые числа.
+
+    // Если число делится на 2 или 3, оно не простое.
+    if (num % 2 === 0 || num % 3 === 0) return false;
+
+    // Проверяем делимость начиная с 5, перебираем потенциальные делители.
+    for (let i = 5; i * i <= num; i += 6) {
+      if (num % i === 0 || num % (i + 2) === 0) return false;
+    }
+    return true; // Если не нашлось делителей, число простое.
+  }
+
+  const primeNumbers: number[] = [];
+
+  for (let number = from; number <= to; number++) {
+    if (isPrime(number)) primeNumbers.push(number);
+  }
+
+  return primeNumbers;
+}
 
 // №5
 
