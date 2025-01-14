@@ -78,13 +78,27 @@ function findPrimesInRange(range: [number, number]): number[] {
 }
 
 // №5
-
 // Сделайте функцию, которая параметрами будет принимать любое количество чисел, а возвращать их сумму.
 
-// №6
+function getSum(...args: number[]): number {
+  return args.reduce((sum, num) => sum + num, 0);
+}
 
+// №6
 // Сделайте функцию, которая заполнит массив N случайными числами из заданного промежутка так, чтобы в массиве не было подряд двух одинаковых чисел.
 
-// №7
+function createUniqueRandomArray(start: number, end: number): number[] {
+  const nums = [];
 
-// Сделайте функцию, которая заполнит массив N случайными числами из заданного промежутка так, чтобы числа не повторялись.
+  let prev: number | null = null;
+
+  while (nums.length < end - start) {
+    const randomNum = Math.floor(Math.random() * (end - start + 1) + start);
+    if (randomNum === prev) continue;
+
+    nums.push(randomNum);
+    prev = randomNum;
+  }
+
+  return nums;
+}
