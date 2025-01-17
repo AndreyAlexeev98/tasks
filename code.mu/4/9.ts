@@ -55,6 +55,47 @@ function remainingDays(): number {
 
 // №2
 // Сделайте функцию, которая будет возвращать дату следующей масленницы, которая празднуется в последнее воскресенье зимы.
+//
+function getNextMaslenitsaDate(): string {
+  const now = new Date();
+
+  function findMaslDay(date: Date): Date {
+    const year = date.getFullYear();
+    let index = 0;
+    while (new Date(year, 2, index).getDay() !== 0) {
+      index--;
+    }
+    return new Date(year, 2, index);
+  }
+
+  if (now.getTime() < findMaslDay(now).getTime()) return `${findMaslDay(now)}`;
+
+  return `${findMaslDay(new Date(now.setFullYear(now.getFullYear() + 1)))}`;
+}
+
+// Или более лаконично:
+// function getNextMaslenitsaDate(): string {
+//   const now = new Date();
+
+//   // Функция для нахождения даты последнего воскресенья февраля
+//   function findMaslenitsaDay(year: number): Date {
+//     let day = new Date(year, 2, 0); // Последний день февраля
+//     while (day.getDay() !== 0) {
+//       day.setDate(day.getDate() - 1); // Отматываем назад до воскресенья
+//     }
+//     return day;
+//   }
+
+//   const currentYearMaslenitsa = findMaslenitsaDay(now.getFullYear());
+
+//   // Если масленица уже прошла в этом году, ищем для следующего года
+//   if (now.getTime() < currentYearMaslenitsa.getTime()) {
+//     return currentYearMaslenitsa.toLocaleDateString();
+//   }
+
+//   const nextYearMaslenitsa = findMaslenitsaDay(now.getFullYear() + 1);
+//   return nextYearMaslenitsa.toLocaleDateString();
+// }
 
 // №3
 // Сделайте функцию, которая будет возвращать случайный цвет.
