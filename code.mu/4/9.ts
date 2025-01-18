@@ -99,6 +99,16 @@ function getNextMaslenitsaDate(): string {
 
 // №3
 // Сделайте функцию, которая будет возвращать случайный цвет.
+function generateRandomColorHexFormat(): string {
+  let color = "#";
+  for (let i = 0; i < 3; i++) {
+    const component = Math.floor(Math.random() * 256)
+      .toString(16)
+      .padStart(2, "0");
+    color += component;
+  }
+  return color;
+}
 
 // №4
 // Сделайте функцию, которая параметром будет принимать массив чисел и возвращать массив общих делителей всех чисел из переданного массива.
