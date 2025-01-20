@@ -112,6 +112,28 @@ function generateRandomColorHexFormat(): string {
 
 // №4
 // Сделайте функцию, которая параметром будет принимать массив чисел и возвращать массив общих делителей всех чисел из переданного массива.
+function generateDivArr(nums: number[]): number[] {
+  const maxNum = Math.max(...nums);
+  const dividers: number[] = [];
+  for (let i = 1; i <= maxNum; i++) {
+    if (nums.every((num) => num % i === 0)) dividers.push(i);
+  }
+
+  return dividers;
+}
 
 // №5
 // Сделайте функцию, которая параметром будет принимать двухмерный массив чисел и возвращать массив максимальных чисел в каждом подмассиве.
+
+function getMaxValueFromSubarrays(nums: number[][]): number[] {
+  const maxValues: number[] = [];
+
+  for (const subNums of nums) {
+    maxValues.push(Math.max(...subNums));
+  }
+
+  return maxValues;
+
+  //  Или в более декларативном стиле
+  // return nums.map((subNums) => Math.max(...subNums));
+}
